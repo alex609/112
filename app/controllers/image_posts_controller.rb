@@ -1,4 +1,6 @@
 class ImagePostsController < ApplicationController
+  before_action :check_authentication, except: :index
+  before_action :check_edit, except: [:index, :show]
   before_action :set_image_post, only: [:show, :edit, :update, :destroy]
 
   # GET /image_posts
@@ -15,7 +17,7 @@ class ImagePostsController < ApplicationController
   # GET /image_posts/new
   def new
     @news_post = NewsPost.find(params[:postid])
-    @image_post = ImagePost.new(news_post: @news_post,user: @current_user)
+    @image_post = ImagePost.new(news_post: @news_post)
   end
 
   # GET /image_posts/1/edit
@@ -29,7 +31,7 @@ class ImagePostsController < ApplicationController
     respond_to do |format|
 
       if @image_post.save
-        format.html { redirect_to @image_post.news_post, notice: 'Image post was successfully created.' }
+        format.html { redirect_to @image_post.news_post, notice: 'Изображение успешно создано.' }
         format.json { render :show, status: :created, location: @image_post }
       else
         format.html { render :new }
@@ -43,7 +45,7 @@ class ImagePostsController < ApplicationController
   def update
     respond_to do |format|
       if @image_post.update(image_post_params)
-        format.html { redirect_to @image_post.news_post, notice: 'Image post was successfully updated.' }
+        format.html { redirect_to @image_post.news_post, notice: 'Изображение успешно обновлено.' }
         format.json { render :show, status: :ok, location: @image_post }
       else
         format.html { render :edit }
@@ -57,7 +59,7 @@ class ImagePostsController < ApplicationController
   def destroy
     @image_post.destroy
     respond_to do |format|
-      format.html { redirect_to image_posts_url, notice: 'Image post was successfully destroyed.' }
+      format.html { redirect_to image_posts_url, notice: 'Изображение успешно удалено.' }
       format.json { head :no_content }
     end
   end

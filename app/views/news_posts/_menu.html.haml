@@ -1,0 +1,12 @@
+-if NewsPost.edit_by?(@current_user)
+  .btn-toolbar
+    =link_to edit_news_post_path(@news_post), class: 'btn btn-primary' do
+      =fa_icon 'edit'
+      Редактировать
+    =link_to @news_post, data: {method: :delete, confirm: t('helpers.sure')}, class: 'btn btn-danger' do
+      =fa_icon 'trash'
+      Удалить
+  .btn-toolbar
+    =link_to new_image_post_path(postid:@news_post.id),id:@news_post, class: 'btn btn-success' do
+      =fa_icon 'picture-o'
+      Загрузить изображение

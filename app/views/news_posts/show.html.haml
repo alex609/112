@@ -1,22 +1,28 @@
 .page-header
   %h1=@news_post.title
 
+
+=render 'menu'
+
 %p
-  %div=@news_post.post_text
+  .well
+    .well-sm
+      .wbr
+        =@news_post.post_text
 
 .row
   -@news_post.image_posts.each do |im|
     -if im.image?
-      .col-md-5
-        =image_tag im.image.url(:medium), alt: @news_post.title, class: 'img-responsive'
+      .col-xs-6
+        .col-md-13
+          .thumbnail
+            =image_tag im.image.url(:medium), alt: @news_post.title, class: 'img-responsive'
 
-%a href="https://twitter.com/intent/tweet?screen_name=support" class="twitter-mention-button">Tweet to @support
-%script!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
--if NewsPost.edit_by?(@current_user)
-  .btn-toolbar
-    =link_to new_image_post_path(postid:@news_post.id),id:@news_post, class: 'btn btn-primary' do
-      =fa_icon 'picture-o'
-      Загрузить изображение
+
+-if not NewsPost.edit_by?(@current_user)
+  %a.twitter-share-button{"data-size" => "large", :href => "https://twitter.com/share"} Tweet
+  :javascript
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
 -if @news_post.user
   %small.text-muted=@news_post.user

@@ -36,7 +36,9 @@ ru:
       news_post:
         title: Заголовок
         post_text: Текст
-
+      image_post:
+        image: Изображение
+        image_content_type: Тип изображения  
 
       film:
         name: Название
