@@ -5,4 +5,9 @@ class ImagePost < ActiveRecord::Base
 
     validates_attachment :image, content_type: {content_type: /\Aimage\/.*\z/}
 
+    def self.edit_by?(u)
+      u.try(:admin?)
+    end
+
+
 end

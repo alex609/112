@@ -16,7 +16,12 @@
       .col-xs-6
         .col-md-13
           .thumbnail
-            =image_tag im.image.url(:medium),href: image_post_path(im) , alt: @news_post.title, class: 'img-responsive'
+            -if NewsPost.edit_by?(@current_user)
+              =link_to im, data: {method: :delete, confirm: t('helpers.sure')}, class: 'btn btn-danger' do
+                =fa_icon 'trash'
+                Удалить
+            =image_tag im.image.url(:medium), alt: @news_post.title, class: 'img-responsive'
+
 
 
 -if not NewsPost.edit_by?(@current_user)

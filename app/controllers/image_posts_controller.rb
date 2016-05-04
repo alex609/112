@@ -14,6 +14,10 @@ class ImagePostsController < ApplicationController
   def show
   end
 
+  def check_edit
+    render_error unless ImagePost.edit_by?(@current_user)
+  end
+
   # GET /image_posts/new
   def new
     @news_post = NewsPost.find(params[:postid])
@@ -59,7 +63,7 @@ class ImagePostsController < ApplicationController
   def destroy
     @image_post.destroy
     respond_to do |format|
-      format.html { redirect_to image_posts_url, notice: 'Изображение успешно удалено.' }
+      format.html { redirect_to news_post_url(@image_post.news_post), notice: 'Изображение успешно удалено.' }
       format.json { head :no_content }
     end
   end
