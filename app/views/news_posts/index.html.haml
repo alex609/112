@@ -1,0 +1,11 @@
+.page-header
+  %h1 Новости
+-if NewsPost.edit_by?(@current_user)
+  .btn-toolbar
+    =link_to new_news_post_path, class: 'btn btn-primary' do
+      =fa_icon 'plus'
+      Добавить
+.list-group
+  -@news_posts.each do |news_post|
+    =link_to news_post.title,news_post, class: 'list-group-item'
+=paginate @news_posts

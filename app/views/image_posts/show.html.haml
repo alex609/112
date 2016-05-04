@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b News post:
+  = @image_post.news_post_id
+%p
+  %b Image file name:
+  = @image_post.image_file_name
+%p
+  %b Image content type:
+  = @image_post.image_content_type
+%p
+  %b Image file size:
+  = @image_post.image_file_size
+%p
+  %b Image updated at:
+  = @image_post.image_updated_at
+
+= link_to 'Edit', edit_image_post_path(@image_post)
+\|
+= link_to 'Back', image_posts_path

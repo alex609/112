@@ -1,0 +1,29 @@
+%h1 Listing image_posts
+
+%table
+  %thead
+    %tr
+      %th News post
+      %th Image file name
+      %th Image content type
+      %th Image file size
+      %th Image updated at
+      %th
+      %th
+      %th
+
+  %tbody
+    - @image_posts.each do |image_post|
+      %tr
+        %td= image_post.news_post_id
+        %td= image_post.image_file_name
+        %td= image_post.image_content_type
+        %td= image_post.image_file_size
+        %td= image_post.image_updated_at
+        %td= link_to 'Show', image_post
+        %td= link_to 'Edit', edit_image_post_path(image_post)
+        %td= link_to 'Destroy', image_post, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Image post', new_image_post_path
