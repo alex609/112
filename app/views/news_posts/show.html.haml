@@ -16,7 +16,7 @@
       .col-xs-6
         .col-md-13
           .thumbnail
-            =image_tag im.image.url(:medium), alt: @news_post.title, class: 'img-responsive'
+            =image_tag im.image.url(:medium),href: image_post_path(im) , alt: @news_post.title, class: 'img-responsive'
 
 
 -if not NewsPost.edit_by?(@current_user)
@@ -24,6 +24,6 @@
   :javascript
     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
--if @news_post.user
-  %small.text-muted=@news_post.user
+-if @news_post.user_id
+  %small.text-muted=@news_post.user_id
 %br
